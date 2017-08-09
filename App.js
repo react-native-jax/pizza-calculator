@@ -40,6 +40,7 @@ export default class App extends React.Component {
           onChangeText={numRSVP => this.setState({ numRSVP })}
           value={this.state.numRSVP}
           placeholder="Enter a number"
+          autoFocus
         />
       </View>
     );
