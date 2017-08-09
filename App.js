@@ -6,15 +6,19 @@ export default class App extends React.Component {
     numRSVP: null
   };
 
-  renderNumPizzas(rsvpCount) {
-    let rsvps = parseInt(rsvpCount);
-    let actualAttending = rsvps > 10 ? 0.8 * (rsvps - 10) + 10 : rsvps;
-    let pizzaCount =
-      actualAttending > 10
-        ? actualAttending / (20 / 3) + 1.5
-        : actualAttending / (10 / 3);
-    if (rsvps) {
-      // More is better, right? ;)
+  _calculateAttending(rsvpCount) {
+    let attendingCount =
+      rsvpCount > 10 ? 0.8 * (rsvpCount - 10) + 10 : rsvpCount;
+    return parseInt(attendingCount);
+  }
+
+  calculatePizzaOrder(rsvpCount) {
+    let actualAttending = this._calculateAttending(rsvpCount);
+    if (actualAttending) {
+      let pizzaCount =
+        actualAttending > 10
+          ? actualAttending / (20 / 3) + 1.5
+          : actualAttending / (10 / 3);
       return Math.ceil(pizzaCount);
     }
   }
@@ -26,7 +30,7 @@ export default class App extends React.Component {
 
         <View style={styles.jumbotronContainer}>
           <Text style={styles.jumbotronText}>
-            {this.renderNumPizzas(this.state.numRSVP)}
+            {this.calculatePizzaOrder(this.state.numRSVP)}
           </Text>
         </View>
         <Text style={styles.label}>Enter the number of Meetup RSVP's</Text>
