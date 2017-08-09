@@ -19,7 +19,7 @@ export default class App extends React.Component {
         actualAttending > 10
           ? actualAttending / (20 / 3) + 1.5
           : actualAttending / (10 / 3);
-      return Math.ceil(pizzaCount);
+      return `${Math.ceil(pizzaCount)} 🍕`;
     }
   }
 
